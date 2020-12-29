@@ -35,7 +35,6 @@ TEST(Queue, can_assign_queues)
 	q1.Push(2);
 	q2.Push(3);
 	ASSERT_NO_THROW(q1 = q2);
-	q1 = q2;
 	EXPECT_EQ(q1.Pop(), q2.Pop());
 }
 
@@ -107,6 +106,19 @@ TEST(Queue, can_put_in_not_full_queue)
 	TQueue<int>q;
 	q.Push(1);
 	ASSERT_NO_THROW(q.Push(2));
+}
+
+TEST(Queue, can_get_the_head)
+{
+	TQueue<int>q;
+	q.Push(1);
+	ASSERT_NO_THROW(q.GetHead());
+}
+
+TEST(Queue, cant_get_the_head_of_empty_queue)
+{
+	TQueue<int>q;
+	ASSERT_ANY_THROW(q.GetHead());
 }
 
 

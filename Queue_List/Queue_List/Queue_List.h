@@ -5,7 +5,7 @@ template <class T>
 struct TLink
 {
 	T val;
-	TLink<T>* pNext;
+	TLink* pNext;
 };
 
 template <class T>
@@ -47,7 +47,7 @@ public:
 
 	~TQueue() //деструктор
 	{
-		while (pTail != NULL)
+		while (pHead != NULL)
 		{
 			TLink <T>* tmp = pHead;
 			pHead = pHead->pNext;
@@ -77,9 +77,14 @@ public:
 					prev->pNext = p;
 					prev = prev->pNext;
 					tmp = tmp->pNext;
-					prev->pNext = NULL;
 				}
 				pTail = prev;
+				prev->pNext = NULL;
+			}
+			else
+			{
+				pHead = NULL;
+				pTail = NULL;
 			}
 		return *this;
 	}
@@ -132,6 +137,10 @@ public:
 			if (p == NULL && tmp == NULL)
 			{
 				return true;
+			}
+			if (p == NULL || tmp == NULL)
+			{
+				return false;
 			}
 			if (p->val != tmp->val)
 			{
